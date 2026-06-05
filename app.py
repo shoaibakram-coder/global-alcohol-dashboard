@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-
 from charts import *
 from filters import *
 
@@ -9,97 +8,53 @@ page_title="Global Alcohol Dashboard",
 layout="wide"
 )
 
-
-
 df = pd.read_csv("drinks.csv")
-
-
 
 st.markdown("""
 
 """, unsafe_allow_html=True)
 
+st.markdown("""
 
-
-st.markdown(
-"""
-
-
-
-""",
-unsafe_allow_html=True
-)
-
-
-
-st.markdown(
-"""
-
-
-
-""",
-unsafe_allow_html=True
-)
-
-FILTERS
+st.markdown("""
 
 df = sidebar_filters(df)
 
-KPI SECTION
-
-col1, col2, col3, col4 = st.columns(4)
+col1,col2,col3,col4 = st.columns(4)
 
 with col1:
+st.markdown(f"""
 
-st.markdown(
-    f"""
-    <div class="kpi-card">
-        <h4>Total Records</h4>
-        <h1>{len(df)}</h1>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+Total Records
+{len(df)}
+
+""", unsafe_allow_html=True)
 
 with col2:
+st.markdown(f"""
 
-st.markdown(
-    f"""
-    <div class="kpi-card">
-        <h4>Total Countries</h4>
-        <h1>{df['country'].nunique()}</h1>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+Total Countries
+{df['country'].nunique()}
+
+""", unsafe_allow_html=True)
 
 with col3:
+st.markdown(f"""
 
-st.markdown(
-    f"""
-    <div class="kpi-card">
-        <h4>Avg Beer</h4>
-        <h1>{round(df['beer_servings'].mean(),2)}</h1>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+Avg Beer
+{round(df['beer_servings'].mean(),2)}
+
+""", unsafe_allow_html=True)
 
 with col4:
+st.markdown(f"""
 
-st.markdown(
-    f"""
-    <div class="kpi-card">
-        <h4>Avg Wine</h4>
-        <h1>{round(df['wine_servings'].mean(),2)}</h1>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+Avg Wine
+{round(df['wine_servings'].mean(),2)}
+
+""", unsafe_allow_html=True)
 
 st.markdown("", unsafe_allow_html=True)
-
-DATASET
 
 st.subheader("Dataset Preview")
 
@@ -110,9 +65,7 @@ use_container_width=True
 
 st.markdown("", unsafe_allow_html=True)
 
-CHARTS
-
-col5, col6 = st.columns(2)
+col5,col6 = st.columns(2)
 
 with col5:
 
@@ -145,7 +98,6 @@ st.markdown(
     '</div>',
     unsafe_allow_html=True
 )
-EXTRA CHARTS
 
 chart_options = st.session_state.get(
 "chart_options",
