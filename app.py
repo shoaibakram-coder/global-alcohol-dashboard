@@ -91,7 +91,7 @@ h2, h3 {
 
 # LOAD DATA
 
-df = pd.read_csv(r"C:\EDA\data\drinks.csv")
+df = pd.read_csv("drinks.csv")
 # TITLE
 
 st.markdown("""
