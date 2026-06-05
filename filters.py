@@ -112,9 +112,40 @@ def sidebar_filters(df):
     </div>
     """, unsafe_allow_html=True)
 
-    st.sidebar.markdown("---")
+    
+st.sidebar.markdown("---")
 
-    st.sidebar.header("Dashboard Filters")
+st.sidebar.markdown(
+    """
+    <h1 style="
+        color:white;
+        font-size:22px;
+        font-weight:bold;
+    ">
+    🎛️ Dashboard Controls
+    </h1>
+    """,
+    unsafe_allow_html=True
+)
+
+beer_range = st.sidebar.slider(
+    "Beer Servings Range",
+    int(df["beer_servings"].min()),
+    int(df["beer_servings"].max()),
+    (
+        int(df["beer_servings"].min()),
+        int(df["beer_servings"].max())
+    )
+)
+
+df = df[
+    (df["beer_servings"] >= beer_range[0]) &
+    (df["beer_servings"] <= beer_range[1])
+]
+
+
+
+st.sidebar.header("Dashboard Filters")
 
     selected_country = st.sidebar.multiselect(
         "Select Country",
