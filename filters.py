@@ -6,86 +6,53 @@ def sidebar_filters(df):
     <style>
 
     section[data-testid="stSidebar"]{
-        background: linear-gradient(
+        background:linear-gradient(
             180deg,
             #052e16 0%,
             #064e3b 100%
         );
-        border-right: 2px solid #22c55e;
     }
 
     .sidebar-title{
-        font-size: 40px;
-        font-weight: 800;
-        text-align: center;
-        margin-bottom: 10px;
+        color:#22c55e;
 
-        background: linear-gradient(
-            90deg,
-            #22c55e,
-            #4ade80,
-            #86efac
-        );
+        font-size:40px;
 
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        font-weight:800;
+
+        text-align:center;
 
         text-shadow:
-            0px 0px 10px rgba(34,197,94,0.9),
-            0px 0px 20px rgba(74,222,128,0.8),
-            0px 0px 35px rgba(134,239,172,0.7);
+            0px 0px 10px #22c55e,
+            0px 0px 20px #22c55e;
     }
 
     .sidebar-subtitle{
-        color: #dcfce7;
-        text-align: center;
-        font-size: 18px;
-        margin-bottom: 25px;
-    }
+        color:#dcfce7;
 
-    .filter-title{
-        color: #bbf7d0;
-        font-size: 26px;
-        font-weight: 700;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
+        text-align:center;
 
-    label{
-        color: white !important;
-        font-size: 16px !important;
-        font-weight: 600 !important;
-    }
+        font-size:16px;
 
-    div[data-baseweb="select"]{
-        background-color: #022c22 !important;
-        border: 1px solid #22c55e !important;
-        border-radius: 12px !important;
-        box-shadow: 0px 0px 12px rgba(34,197,94,0.4);
-    }
-
-    .stMultiSelect div{
-        color: white !important;
+        margin-bottom:20px;
     }
 
     </style>
     """, unsafe_allow_html=True)
 
     st.sidebar.markdown("""
-        <div class="sidebar-title">
-            🌍 Global Alcohol Dashboard
-        </div>
+    <div class="sidebar-title">
+        🌍 Global Alcohol Dashboard
+    </div>
 
-        <div class="sidebar-subtitle">
-            Professional Data Analytics
-        </div>
-
-        <hr>
-
-        <div class="filter-title">
-            Dashboard Filters
-        </div>
+    <div class="sidebar-subtitle">
+        Professional Data Analytics
+    </div>
     """, unsafe_allow_html=True)
+
+    st.sidebar.markdown("---")
+
+    st.sidebar.header("Dashboard Filters")
 
     selected_country = st.sidebar.multiselect(
         "Select Country",
@@ -96,9 +63,8 @@ def sidebar_filters(df):
     chart_options = st.sidebar.multiselect(
         "Select Additional Charts",
         [
-            "Bar Chart",
-            "Scatter Plot",
             "Histogram",
+            "Scatter Plot",
             "Box Plot",
             "Heatmap",
             "Area Chart"
@@ -112,3 +78,4 @@ def sidebar_filters(df):
     ]
 
     return filtered_df
+
