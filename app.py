@@ -1,217 +1,115 @@
 import streamlit as st
 import pandas as pd
+
 from charts import *
 from filters import *
 
 st.set_page_config(
-page_title="Global Alcohol Dashboard",
-layout="wide"
+    page_title="Global Alcohol Dashboard",
+    layout="wide"
 )
 
 df = pd.read_csv("drinks.csv")
 
-st.markdown("""
+st.title("🌍 Global Alcohol Consumption Dashboard")
 
-""", unsafe_allow_html=True)
-
-st.markdown("""
-
-st.markdown("""
+st.write("Professional Data Analytics Dashboard")
 
 df = sidebar_filters(df)
 
 col1,col2,col3,col4 = st.columns(4)
 
-with col1:
-st.markdown(f"""
+col1.metric(
+    "Total Records",
+    len(df)
+)
 
-Total Records
-{len(df)}
+col2.metric(
+    "Total Countries",
+    df["country"].nunique()
+)
 
-""", unsafe_allow_html=True)
+col3.metric(
+    "Avg Beer",
+    round(df["beer_servings"].mean(),2)
+)
 
-with col2:
-st.markdown(f"""
+col4.metric(
+    "Avg Wine",
+    round(df["wine_servings"].mean(),2)
+)
 
-Total Countries
-{df['country'].nunique()}
-
-""", unsafe_allow_html=True)
-
-with col3:
-st.markdown(f"""
-
-Avg Beer
-{round(df['beer_servings'].mean(),2)}
-
-""", unsafe_allow_html=True)
-
-with col4:
-st.markdown(f"""
-
-Avg Wine
-{round(df['wine_servings'].mean(),2)}
-
-""", unsafe_allow_html=True)
-
-st.markdown("", unsafe_allow_html=True)
+st.markdown("---")
 
 st.subheader("Dataset Preview")
 
 st.dataframe(
-df,
-use_container_width=True
+    df,
+    use_container_width=True
 )
 
-st.markdown("", unsafe_allow_html=True)
+st.markdown("---")
 
 col5,col6 = st.columns(2)
 
 with col5:
 
-st.markdown(
-    '<div class="chart-box">',
-    unsafe_allow_html=True
-)
+    st.subheader("Bar Chart")
 
-st.subheader("Bar Chart")
-
-bar_chart(df)
-
-st.markdown(
-    '</div>',
-    unsafe_allow_html=True
-)
+    bar_chart(df)
 
 with col6:
 
-st.markdown(
-    '<div class="chart-box">',
-    unsafe_allow_html=True
-)
+    st.subheader("Pie Chart")
 
-st.subheader("Pie Chart")
+    pie_chart(df)
 
-pie_chart(df)
-
-st.markdown(
-    '</div>',
-    unsafe_allow_html=True
-)
+st.markdown("---")
 
 chart_options = st.session_state.get(
-"chart_options",
-[]
+    "chart_options",
+    []
 )
 
 if "Histogram" in chart_options:
 
-st.markdown(
-    '<div class="chart-box">',
-    unsafe_allow_html=True
-)
+    st.subheader("Histogram")
 
-st.subheader("Histogram")
-
-histogram(df)
-
-st.markdown(
-    '</div>',
-    unsafe_allow_html=True
-)
+    histogram(df)
 
 if "Scatter Plot" in chart_options:
 
-st.markdown(
-    '<div class="chart-box">',
-    unsafe_allow_html=True
-)
+    st.subheader("Scatter Plot")
 
-st.subheader("Scatter Plot")
-
-scatter_plot(df)
-
-st.markdown(
-    '</div>',
-    unsafe_allow_html=True
-)
+    scatter_plot(df)
 
 if "Box Plot" in chart_options:
 
-st.markdown(
-    '<div class="chart-box">',
-    unsafe_allow_html=True
-)
+    st.subheader("Box Plot")
 
-st.subheader("Box Plot")
-
-box_plot(df)
-
-st.markdown(
-    '</div>',
-    unsafe_allow_html=True
-)
+    box_plot(df)
 
 if "Heatmap" in chart_options:
 
-st.markdown(
-    '<div class="chart-box">',
-    unsafe_allow_html=True
-)
+    st.subheader("Heatmap")
 
-st.subheader("Heatmap")
-
-heatmap(df)
-
-st.markdown(
-    '</div>',
-    unsafe_allow_html=True
-)
+    heatmap(df)
 
 if "Area Chart" in chart_options:
 
-st.markdown(
-    '<div class="chart-box">',
-    unsafe_allow_html=True
-)
+    st.subheader("Area Chart")
 
-st.subheader("Area Chart")
-
-area_chart(df)
-
-st.markdown(
-    '</div>',
-    unsafe_allow_html=True
-)
+    area_chart(df)
 
 if "Count Plot" in chart_options:
 
-st.markdown(
-    '<div class="chart-box">',
-    unsafe_allow_html=True
-)
+    st.subheader("Count Plot")
 
-st.subheader("Count Plot")
-
-count_plot(df)
-
-st.markdown(
-    '</div>',
-    unsafe_allow_html=True
-)
+    count_plot(df)
 
 if "Violin Plot" in chart_options:
 
-st.markdown(
-    '<div class="chart-box">',
-    unsafe_allow_html=True
-)
+    st.subheader("Violin Plot")
 
-st.subheader("Violin Plot")
+    violin_plot(df)
 
-violin_plot(df)
-
-st.markdown(
-    '</div>',
-    unsafe_allow_html=True
-)
