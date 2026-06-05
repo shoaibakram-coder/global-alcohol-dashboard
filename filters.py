@@ -2,86 +2,130 @@ import streamlit as st
 
 def sidebar_filters(df):
 
-    # SIDEBAR TITLE
-
-    st.sidebar.markdown(
-    """
+    st.sidebar.markdown("""
     <style>
-    .sidebar-title {
-        color: #39FF14;
-        font-size: 38px;
-        font-weight: 800;
-        line-height: 1.2;
-        text-shadow: 0px 0px 3px #39FF14;
-    }
-    </style>
 
+    section[data-testid="stSidebar"] {
+
+        background: linear-gradient(
+            180deg,
+            #064E3B 0%,
+            #065F46 45%,
+            #0F172A 100%
+        );
+
+        border-right: 2px solid #10B981;
+    }
+
+    .sidebar-title {
+
+        color: white;
+
+        font-size: 34px;
+
+        font-weight: 800;
+
+        text-align: center;
+
+        text-shadow:
+            0px 0px 8px rgba(16,185,129,0.7),
+            0px 0px 18px rgba(16,185,129,0.5);
+
+        margin-bottom: 10px;
+    }
+
+    .sidebar-subtitle {
+
+        color: #D1FAE5;
+
+        text-align: center;
+
+        font-size: 16px;
+
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+
+        color: white;
+
+        font-size: 28px;
+
+        font-weight: 700;
+
+        margin-top: 25px;
+
+        margin-bottom: 15px;
+    }
+
+    label {
+
+        color: white !important;
+
+        font-weight: 600 !important;
+    }
+
+    div[data-baseweb="select"] {
+
+        background-color: #0F172A !important;
+
+        border-radius: 14px !important;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    # TITLE
+
+    st.sidebar.markdown("""
     <div class="sidebar-title">
-        🌍 Global Alcohol <br>
-        Consumption Dashboard
+        🔢 Digit Dashboard
     </div>
-    """,
-    unsafe_allow_html=True
-)
+
+    <div class="sidebar-subtitle">
+        Professional Data Analytics
+    </div>
+    """, unsafe_allow_html=True)
 
     st.sidebar.markdown("---")
 
-    # FILTER TITLE
+    # FILTERS TITLE
 
     st.sidebar.markdown("""
-    <h2 style='
-    color:white;
-    font-size:28px;
-    '>
-    Dashboard Filters
-    </h2>
+    <div class="section-title">
+        🎛 Filters
+    </div>
     """, unsafe_allow_html=True)
 
-    # COUNTRY FILTER
+    # DIGIT FILTER
 
-    country = st.sidebar.multiselect(
-        "Select Country",
-        df["country"].unique(),
-        default=df["country"].unique()
+    selected_digits = st.sidebar.multiselect(
+        "Select Digits",
+        options=sorted(df["digit"].unique()),
+        default=sorted(df["digit"].unique())
     )
 
-    # BEER RANGE
+    # CHART SELECTION
 
-    beer_range = st.sidebar.slider(
-        "Beer Servings",
-        int(df["beer_servings"].min()),
-        int(df["beer_servings"].max()),
-        (
-            int(df["beer_servings"].min()),
-            int(df["beer_servings"].max())
-        )
+    chart_options = st.sidebar.multiselect(
+        "Choose Charts",
+        [
+            "Histogram",
+            "Scatter Plot",
+            "Box Plot",
+            "Heatmap",
+            "Area Chart",
+            "Count Plot",
+            "Violin Plot"
+        ]
     )
 
-    # SEARCH FILTER
+    st.session_state["chart_options"] = chart_options
 
-    search = st.sidebar.text_input(
-        "Search Country"
-    )
-
-    # FILTER DATAFRAME
+    # FILTER DATA
 
     filtered_df = df[
-        (df["country"].isin(country))
-        &
-        (df["beer_servings"] >= beer_range[0])
-        &
-        (df["beer_servings"] <= beer_range[1])
+        df["digit"].isin(selected_digits)
     ]
-
-    # SEARCH LOGIC
-
-    if search:
-
-        filtered_df = filtered_df[
-            filtered_df["country"].str.contains(
-                search,
-                case=False
-            )
-        ]
 
     return filtered_df

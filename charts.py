@@ -26,7 +26,11 @@ def bar_chart(df):
 
     ax.set_title("Top Beer Consuming Countries")
 
-    st.pyplot(fig)
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
+st.pyplot(fig)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # HISTOGRAM
@@ -43,7 +47,11 @@ def histogram(df):
 
     ax.set_title("Alcohol Distribution")
 
-    st.pyplot(fig)
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
+st.pyplot(fig)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # SCATTER PLOT
@@ -62,7 +70,11 @@ def scatter_plot(df):
 
     ax.set_title("Beer vs Spirit")
 
-    st.pyplot(fig)
+   st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
+st.pyplot(fig)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # BOX PLOT
@@ -84,7 +96,11 @@ def box_plot(df):
 
     ax.set_title("Box Plot")
 
-    st.pyplot(fig)
+   st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
+st.pyplot(fig)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # HEATMAP
@@ -102,7 +118,11 @@ def heatmap(df):
 
     ax.set_title("Correlation Heatmap")
 
-    st.pyplot(fig)
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
+st.pyplot(fig)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # PIE CHART
@@ -121,7 +141,11 @@ def pie_chart(df):
 
     ax.set_title("Wine Consumption Share")
 
-    st.pyplot(fig)
+   st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
+st.pyplot(fig)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # LINE CHART
@@ -146,8 +170,11 @@ def line_chart(df):
     plt.xticks(rotation=45)
 
     ax.set_title("Alcohol Consumption Trend")
+st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
-    st.pyplot(fig)
+st.pyplot(fig)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # AREA CHART
@@ -175,7 +202,11 @@ def area_chart(df):
 
     ax.set_title("Beer Servings Area Chart")
 
-    st.pyplot(fig)
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
+st.pyplot(fig)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # COUNT PLOT
@@ -192,7 +223,11 @@ def count_plot(df):
 
     ax.set_title("Beer Servings Count Plot")
 
-    st.pyplot(fig)
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
+st.pyplot(fig)
+
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # VIOLIN PLOT
@@ -214,4 +249,8 @@ def violin_plot(df):
 
     ax.set_title("Violin Plot")
 
-    st.pyplot(fig)
+    sst.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
+st.pyplot(fig)
+
+st.markdown('</div>', unsafe_allow_html=True)

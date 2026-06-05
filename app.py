@@ -3,6 +3,84 @@ import pandas as pd
 
 from charts import *
 from filters import *
+import streamlit as st
+
+# PAGE CONFIG
+
+st.set_page_config(
+    page_title="Digit Dashboard",
+    layout="wide"
+)
+
+# MAIN CSS
+
+st.markdown("""
+<style>
+
+/* MAIN BACKGROUND */
+
+.stApp {
+
+    background: linear-gradient(
+        135deg,
+        #132238 0%,
+        #1B2A41 45%,
+        #0F766E 100%
+    );
+
+    color: white;
+}
+
+/* MAIN CONTENT */
+
+.main .block-container {
+
+    padding-top: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+/* HEADINGS */
+
+h1, h2, h3 {
+
+    color: white !important;
+}
+
+/* KPI CARDS */
+
+.kpi-card {
+
+    background: rgba(15,23,42,0.75);
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.35);
+
+    text-align: center;
+}
+
+/* CHART BOX */
+
+.chart-box {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    box-shadow: 0px 4px 18px rgba(0,0,0,0.25);
+
+    margin-bottom: 25px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 # PAGE CONFIG
 
@@ -123,6 +201,42 @@ df = sidebar_filters(df)
 # KPI CARDS
 
 col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+
+    st.markdown(f"""
+    <div class="kpi-card">
+        <h4>Total Records</h4>
+        <h1>{len(df)}</h1>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+
+    st.markdown(f"""
+    <div class="kpi-card">
+        <h4>Unique Digits</h4>
+        <h1>{df['digit'].nunique()}</h1>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col3:
+
+    st.markdown(f"""
+    <div class="kpi-card">
+        <h4>Avg Pixel 0</h4>
+        <h1>{round(df['pixel_0'].mean(),2)}</h1>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col4:
+
+    st.markdown(f"""
+    <div class="kpi-card">
+        <h4>Avg Pixel 1</h4>
+        <h1>{round(df['pixel_1'].mean(),2)}</h1>
+    </div>
+    """, unsafe_allow_html=True)
 
 col1.metric(
     "Total Records",
