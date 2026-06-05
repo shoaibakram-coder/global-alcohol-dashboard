@@ -29,6 +29,7 @@ st.markdown("""
 }
 
 .kpi-box{
+
     background:linear-gradient(
         135deg,
         #1E293B,
@@ -47,14 +48,22 @@ st.markdown("""
 }
 
 .kpi-title{
+
     color:#CBD5E1;
+
     font-size:18px;
+
     margin-bottom:10px;
+
+    font-weight:bold;
 }
 
 .kpi-value{
+
     color:white;
+
     font-size:38px;
+
     font-weight:bold;
 }
 
@@ -154,6 +163,8 @@ with col6:
 
     pie_chart(df)
 
+st.markdown("---")
+
 chart_options = st.session_state.get(
     "chart_options",
     []
@@ -188,4 +199,16 @@ if "Area Chart" in chart_options:
     st.subheader("Area Chart")
 
     area_chart(df)
+
+if "Count Plot" in chart_options:
+
+    st.subheader("Count Plot")
+
+    count_plot(df)
+
+if "Violin Plot" in chart_options:
+
+    st.subheader("Violin Plot")
+
+    violin_plot(df)
 
