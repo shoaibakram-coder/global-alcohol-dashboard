@@ -50,6 +50,19 @@ st.write("Professional Data Analytics Dashboard")
 
 df = sidebar_filters(df)
 
+page = st.session_state.get("page")
+
+if page == "Dashboard Overview":
+    st.title("📊 Dashboard Overview")
+
+elif page == "Charts & Visualizations":
+    st.title("📈 Charts & Visualizations")
+
+elif page == "Dataset Explorer":
+    st.title("🗂️ Dataset Explorer")
+
+
+
 col1,col2,col3,col4 = st.columns(4)
 
 with col1:

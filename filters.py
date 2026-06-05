@@ -60,12 +60,10 @@ def sidebar_filters(df):
     svg{
         color:white !important;
     }
-                        
-.stSlider > div > div > div > div {
-    background-color:#2563EB !important;
-}
 
-
+    .stSlider > div > div > div > div{
+        background-color:#2563EB !important;
+    }
 
     </style>
     """, unsafe_allow_html=True)
@@ -101,6 +99,21 @@ def sidebar_filters(df):
 
     st.sidebar.markdown("---")
 
+    st.sidebar.header("📌 Navigation")
+
+    page = st.sidebar.radio(
+        "",
+        [
+            "Dashboard Overview",
+            "Charts & Visualizations",
+            "Dataset Explorer"
+        ]
+    )
+
+    st.session_state["page"] = page
+
+    st.sidebar.markdown("---")
+
     st.sidebar.header("Dashboard Filters")
 
     selected_country = st.sidebar.multiselect(
@@ -129,3 +142,4 @@ def sidebar_filters(df):
     ]
 
     return filtered_df
+
