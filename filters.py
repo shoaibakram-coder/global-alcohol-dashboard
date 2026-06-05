@@ -46,30 +46,7 @@ def sidebar_filters(df):
         font-weight:bold !important;
     }
 
-[data-baseweb="tag"]{
-
-    background-color:#2563EB !important;
-
-    color:white !important;
-}
-
-[data-baseweb="tag"] span{
-
-    color:white !important;
-}
-
-
-
-    div[data-baseweb="select"] > div{
-
-        background-color:#0F172A !important;
-
-        border:1px solid #38BDF8 !important;
-
-        border-radius:12px !important;
-    }
-
-    div[data-baseweb="tag"]{
+    [data-baseweb="tag"]{
 
         background-color:#2563EB !important;
 
@@ -82,16 +59,25 @@ def sidebar_filters(df):
         padding:4px 8px !important;
     }
 
-    div[data-baseweb="tag"] span{
+    [data-baseweb="tag"] span{
 
         color:white !important;
 
         font-weight:bold !important;
     }
 
-    div[data-baseweb="tag"] svg{
+    [data-baseweb="tag"] svg{
 
         color:white !important;
+    }
+
+    div[data-baseweb="select"] > div{
+
+        background-color:#0F172A !important;
+
+        border:1px solid #38BDF8 !important;
+
+        border-radius:12px !important;
     }
 
     svg{
@@ -112,40 +98,45 @@ def sidebar_filters(df):
     </div>
     """, unsafe_allow_html=True)
 
-    
+    st.sidebar.markdown("---")
+
+    st.sidebar.markdown(
+        """
+        <h2 style="
+            color:white;
+            font-size:26px;
+            font-weight:bold;
+            margin-bottom:15px;
+        ">
+        🎛️ Dashboard Controls
+        </h2>
+        """,
+        unsafe_allow_html=True
+    )
+
+    beer_range = st.sidebar.slider(
+        "Beer Servings Range",
+        min_value=int(df["beer_servings"].min()),
+        max_value=int(df["beer_servings"].max()),
+        value=(
+            int(df["beer_servings"].min()),
+            int(df["beer_servings"].max())
+        )
+    )
+
+    df = df[
+        (df["beer_servings"] >= beer_range[0]) &
+        (df["beer_servings"] <= beer_range[1])
+    ]
+
+    st.sidebar.markdown("---")
+
+  st.sidebar.header("🎛️ Dashboard Controls")
+
 st.sidebar.markdown("---")
 
-st.sidebar.markdown(
-    """
-    <h1 style="
-        color:white;
-        font-size:22px;
-        font-weight:bold;
-    ">
-    🎛️ Dashboard Controls
-    </h1>
-    """,
-    unsafe_allow_html=True
-)
 
-beer_range = st.sidebar.slider(
-    "Beer Servings Range",
-    int(df["beer_servings"].min()),
-    int(df["beer_servings"].max()),
-    (
-        int(df["beer_servings"].min()),
-        int(df["beer_servings"].max())
-    )
-)
-
-df = df[
-    (df["beer_servings"] >= beer_range[0]) &
-    (df["beer_servings"] <= beer_range[1])
-]
-
-
-
-st.sidebar.header("Dashboard Filters")
+    st.sidebar.header("Dashboard Filters")
 
     selected_country = st.sidebar.multiselect(
         "Select Country",
