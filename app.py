@@ -126,12 +126,18 @@ countries = st.sidebar.multiselect(
     default=sorted(df["country"].unique()[:10])
 )
 
-charts = st.sidebar.multiselect(
+chart_options = st.sidebar.multiselect(
     "Select Additional Charts",
     [
-        "Heatmap",
+        "Histogram",
+        "Pie Chart",
         "Scatter Plot",
-        "Violin Plot"
+        "Box Plot",
+        "Heatmap",
+        "Area Chart",
+        "Count Plot",
+        "Violin Plot",
+        "Line Chart"
     ]
 )
 
@@ -152,13 +158,8 @@ with col1:
 
     st.markdown(f"""
     <div class="kpi-box">
-        <div class="kpi-title">
-            Total Records
-        </div>
-
-        <div class="kpi-value">
-            {len(df)}
-        </div>
+        <div class="kpi-title">Total Records</div>
+        <div class="kpi-value">{len(df)}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -166,13 +167,8 @@ with col2:
 
     st.markdown(f"""
     <div class="kpi-box">
-        <div class="kpi-title">
-            Total Countries
-        </div>
-
-        <div class="kpi-value">
-            {df['country'].nunique()}
-        </div>
+        <div class="kpi-title">Total Countries</div>
+        <div class="kpi-value">{df['country'].nunique()}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -180,13 +176,8 @@ with col3:
 
     st.markdown(f"""
     <div class="kpi-box">
-        <div class="kpi-title">
-            Avg Beer
-        </div>
-
-        <div class="kpi-value">
-            {round(df['beer_servings'].mean(),2)}
-        </div>
+        <div class="kpi-title">Avg Beer</div>
+        <div class="kpi-value">{round(df['beer_servings'].mean(),2)}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -194,13 +185,8 @@ with col4:
 
     st.markdown(f"""
     <div class="kpi-box">
-        <div class="kpi-title">
-            Avg Wine
-        </div>
-
-        <div class="kpi-value">
-            {round(df['wine_servings'].mean(),2)}
-        </div>
+        <div class="kpi-title">Avg Wine</div>
+        <div class="kpi-value">{round(df['wine_servings'].mean(),2)}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -208,10 +194,7 @@ st.markdown("---")
 
 st.subheader("Dataset Preview")
 
-st.dataframe(
-    df,
-    use_container_width=True
-)
+st.dataframe(df, use_container_width=True)
 
 st.markdown("---")
 
@@ -221,7 +204,7 @@ with col5:
 
     st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
-    st.subheader("Top Beer Consuming Countries")
+    st.subheader("Bar Chart")
 
     fig, ax = plt.subplots(figsize=(8,5))
 
@@ -246,7 +229,7 @@ with col6:
 
     st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
-    st.subheader("Beer vs Wine Consumption")
+    st.subheader("Scatter Plot")
 
     fig2, ax2 = plt.subplots(figsize=(8,5))
 
@@ -263,67 +246,115 @@ with col6:
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-if "Heatmap" in charts:
+if "Histogram" in chart_options:
 
-    st.markdown("---")
+    st.subheader("Histogram")
 
-    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+    fig3, ax3 = plt.subplots(figsize=(8,5))
 
-    st.subheader("Correlation Heatmap")
-
-    fig3, ax3 = plt.subplots(figsize=(10,6))
-
-    sns.heatmap(
-        df.select_dtypes(include="number").corr(),
-        annot=True,
-        cmap="Blues",
-        ax=ax3
+    ax3.hist(
+        df["beer_servings"],
+        bins=20,
+        color="#2563EB"
     )
 
     st.pyplot(fig3)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+if "Pie Chart" in chart_options:
 
-if "Scatter Plot" in charts:
+    st.subheader("Pie Chart")
 
-    st.markdown("---")
+    fig4, ax4 = plt.subplots(figsize=(8,8))
 
-    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
-
-    st.subheader("Spirit vs Pure Alcohol")
-
-    fig4, ax4 = plt.subplots(figsize=(8,5))
-
-    sns.scatterplot(
-        x="spirit_servings",
-        y="total_litres_of_pure_alcohol",
-        data=df,
-        color="#38BDF8",
-        s=100,
+    df.groupby("continent")["beer_servings"].sum().plot(
+        kind="pie",
+        autopct="%1.1f%%",
         ax=ax4
     )
 
     st.pyplot(fig4)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+if "Box Plot" in chart_options:
 
-if "Violin Plot" in charts:
-
-    st.markdown("---")
-
-    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
-
-    st.subheader("Beer Servings Distribution")
+    st.subheader("Box Plot")
 
     fig5, ax5 = plt.subplots(figsize=(8,5))
 
-    sns.violinplot(
+    sns.boxplot(
         y=df["beer_servings"],
-        color="#2563EB",
+        color="#38BDF8",
         ax=ax5
     )
 
     st.pyplot(fig5)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+if "Heatmap" in chart_options:
+
+    st.subheader("Heatmap")
+
+    fig6, ax6 = plt.subplots(figsize=(10,6))
+
+    sns.heatmap(
+        df.select_dtypes(include="number").corr(),
+        annot=True,
+        cmap="Blues",
+        ax=ax6
+    )
+
+    st.pyplot(fig6)
+
+if "Area Chart" in chart_options:
+
+    st.subheader("Area Chart")
+
+    st.area_chart(
+        df[
+            [
+                "beer_servings",
+                "wine_servings"
+            ]
+        ].head(20)
+    )
+
+if "Count Plot" in chart_options:
+
+    st.subheader("Count Plot")
+
+    fig7, ax7 = plt.subplots(figsize=(8,5))
+
+    sns.countplot(
+        y="country",
+        data=df.head(10),
+        palette="Blues_r",
+        ax=ax7
+    )
+
+    st.pyplot(fig7)
+
+if "Violin Plot" in chart_options:
+
+    st.subheader("Violin Plot")
+
+    fig8, ax8 = plt.subplots(figsize=(8,5))
+
+    sns.violinplot(
+        y=df["beer_servings"],
+        color="#2563EB",
+        ax=ax8
+    )
+
+    st.pyplot(fig8)
+
+if "Line Chart" in chart_options:
+
+    st.subheader("Line Chart")
+
+    fig9, ax9 = plt.subplots(figsize=(10,5))
+
+    df["beer_servings"].head(20).plot(
+        ax=ax9,
+        color="#38BDF8"
+    )
+
+    st.pyplot(fig9)
 
