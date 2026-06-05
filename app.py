@@ -29,7 +29,6 @@ st.markdown("""
 }
 
 .kpi-box{
-
     background:linear-gradient(
         135deg,
         #1E293B,
@@ -48,22 +47,15 @@ st.markdown("""
 }
 
 .kpi-title{
-
     color:#CBD5E1;
-
     font-size:18px;
-
     margin-bottom:10px;
-
     font-weight:bold;
 }
 
 .kpi-value{
-
     color:white;
-
     font-size:38px;
-
     font-weight:bold;
 }
 
@@ -84,59 +76,71 @@ col1, col2, col3, col4 = st.columns(4)
 
 with col1:
 
-    st.markdown(f"""
-    <div class="kpi-box">
-        <div class="kpi-title">
-            Total Records
-        </div>
+    st.markdown(
+        f"""
+        <div class="kpi-box">
+            <div class="kpi-title">
+                Total Records
+            </div>
 
-        <div class="kpi-value">
-            {len(df)}
+            <div class="kpi-value">
+                {len(df)}
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 with col2:
 
-    st.markdown(f"""
-    <div class="kpi-box">
-        <div class="kpi-title">
-            Total Countries
-        </div>
+    st.markdown(
+        f"""
+        <div class="kpi-box">
+            <div class="kpi-title">
+                Total Countries
+            </div>
 
-        <div class="kpi-value">
-            {df['country'].nunique()}
+            <div class="kpi-value">
+                {df['country'].nunique()}
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 with col3:
 
-    st.markdown(f"""
-    <div class="kpi-box">
-        <div class="kpi-title">
-            Avg Beer
-        </div>
+    st.markdown(
+        f"""
+        <div class="kpi-box">
+            <div class="kpi-title">
+                Avg Beer
+            </div>
 
-        <div class="kpi-value">
-            {round(df['beer_servings'].mean(),2)}
+            <div class="kpi-value">
+                {round(df['beer_servings'].mean(),2)}
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 with col4:
 
-    st.markdown(f"""
-    <div class="kpi-box">
-        <div class="kpi-title">
-            Avg Wine
-        </div>
+    st.markdown(
+        f"""
+        <div class="kpi-box">
+            <div class="kpi-title">
+                Avg Wine
+            </div>
 
-        <div class="kpi-value">
-            {round(df['wine_servings'].mean(),2)}
+            <div class="kpi-value">
+                {round(df['wine_servings'].mean(),2)}
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 st.markdown("---")
 
