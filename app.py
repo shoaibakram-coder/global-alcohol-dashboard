@@ -154,48 +154,46 @@ df = sidebar_filters(df)
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-
-```
 st.markdown(f"""
 <div class="kpi-card">
     <h4>Total Records</h4>
     <h1>{len(df)}</h1>
 </div>
 """, unsafe_allow_html=True)
-```
+
 
 with col2:
 
-```
+
 st.markdown(f"""
 <div class="kpi-card">
     <h4>Total Countries</h4>
     <h1>{df['country'].nunique()}</h1>
 </div>
 """, unsafe_allow_html=True)
-```
+
 
 with col3:
 
-```
+
 st.markdown(f"""
 <div class="kpi-card">
     <h4>Avg Beer</h4>
     <h1>{round(df['beer_servings'].mean(),2)}</h1>
 </div>
 """, unsafe_allow_html=True)
-```
+
 
 with col4:
 
-```
+
 st.markdown(f"""
 <div class="kpi-card">
     <h4>Avg Wine</h4>
     <h1>{round(df['wine_servings'].mean(),2)}</h1>
 </div>
 """, unsafe_allow_html=True)
-```
+
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -216,7 +214,7 @@ col5, col6 = st.columns(2)
 
 with col5:
 
-```
+
 st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
 st.subheader("Bar Chart")
@@ -224,11 +222,11 @@ st.subheader("Bar Chart")
 bar_chart(df)
 
 st.markdown('</div>', unsafe_allow_html=True)
-```
+
 
 with col6:
 
-```
+
 st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
 st.subheader("Pie Chart")
@@ -236,7 +234,7 @@ st.subheader("Pie Chart")
 pie_chart(df)
 
 st.markdown('</div>', unsafe_allow_html=True)
-```
+
 
 # EXTRA CHARTS
 
@@ -247,7 +245,7 @@ chart_options = st.session_state.get(
 
 if "Histogram" in chart_options:
 
-```
+
 st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
 st.subheader("Histogram")
@@ -255,11 +253,11 @@ st.subheader("Histogram")
 histogram(df)
 
 st.markdown('</div>', unsafe_allow_html=True)
-```
+
 
 if "Scatter Plot" in chart_options:
 
-```
+
 st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
 st.subheader("Scatter Plot")
@@ -267,11 +265,11 @@ st.subheader("Scatter Plot")
 scatter_plot(df)
 
 st.markdown('</div>', unsafe_allow_html=True)
-```
+
 
 if "Box Plot" in chart_options:
 
-```
+
 st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
 st.subheader("Box Plot")
@@ -279,11 +277,11 @@ st.subheader("Box Plot")
 box_plot(df)
 
 st.markdown('</div>', unsafe_allow_html=True)
-```
+
 
 if "Heatmap" in chart_options:
 
-```
+
 st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
 st.subheader("Heatmap")
@@ -291,11 +289,11 @@ st.subheader("Heatmap")
 heatmap(df)
 
 st.markdown('</div>', unsafe_allow_html=True)
-```
+
 
 if "Area Chart" in chart_options:
 
-```
+
 st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
 st.subheader("Area Chart")
@@ -303,11 +301,11 @@ st.subheader("Area Chart")
 area_chart(df)
 
 st.markdown('</div>', unsafe_allow_html=True)
-```
+
 
 if "Count Plot" in chart_options:
 
-```
+
 st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
 st.subheader("Count Plot")
@@ -315,11 +313,11 @@ st.subheader("Count Plot")
 count_plot(df)
 
 st.markdown('</div>', unsafe_allow_html=True)
-```
+
 
 if "Violin Plot" in chart_options:
 
-```
+
 st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
 st.subheader("Violin Plot")
@@ -327,4 +325,4 @@ st.subheader("Violin Plot")
 violin_plot(df)
 
 st.markdown('</div>', unsafe_allow_html=True)
-```
+

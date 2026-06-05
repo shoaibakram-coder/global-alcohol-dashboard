@@ -2,7 +2,6 @@ import streamlit as st
 
 def sidebar_filters(df):
 
-```
 st.sidebar.markdown("""
 <style>
 
@@ -152,4 +151,3 @@ if search:
     ]
 
 return filtered_df
-```
