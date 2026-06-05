@@ -9,33 +9,33 @@ page_title="Global Alcohol Dashboard",
 layout="wide"
 )
 
-LOAD DATA
+
 
 df = pd.read_csv("drinks.csv")
 
-CUSTOM CSS
+
 
 st.markdown("""
 
 """, unsafe_allow_html=True)
 
-TITLE
+
 
 st.markdown(
 """
 
-🌍 Global Alcohol Consumption Dashboard
+
 
 """,
 unsafe_allow_html=True
 )
 
-SUBTITLE
+
 
 st.markdown(
 """
 
-Professional Data Analytics Dashboard
+
 
 """,
 unsafe_allow_html=True
