@@ -94,17 +94,29 @@ def area_chart(df):
         ].head(20)
     )
 
+```python id="r3h2mw"
 def count_plot(df):
 
-    fig, ax = plt.subplots(figsize=(8,5))
+    import streamlit as st
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    fig, ax = plt.subplots(figsize=(10,5))
+
+    top_countries = df.head(10)
 
     sns.countplot(
-        x="continent",
-        data=df,
+        y="country",
+        data=top_countries,
+        palette="Blues_r",
         ax=ax
     )
 
+    ax.set_title("Top Countries")
+
     st.pyplot(fig)
+
+
 
 def violin_plot(df):
 
