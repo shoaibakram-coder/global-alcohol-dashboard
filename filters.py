@@ -2,130 +2,154 @@ import streamlit as st
 
 def sidebar_filters(df):
 
-    st.sidebar.markdown("""
-    <style>
+```
+st.sidebar.markdown("""
+<style>
 
-    section[data-testid="stSidebar"] {
+section[data-testid="stSidebar"] {
 
-        background: linear-gradient(
-            180deg,
-            #064E3B 0%,
-            #065F46 45%,
-            #0F172A 100%
-        );
+    background: linear-gradient(
+        180deg,
+        #064E3B 0%,
+        #065F46 45%,
+        #0F172A 100%
+    );
 
-        border-right: 2px solid #10B981;
-    }
+    border-right: 2px solid #10B981;
+}
 
-    .sidebar-title {
+.sidebar-title {
 
-        color: white;
+    color: white;
 
-        font-size: 34px;
+    font-size: 34px;
 
-        font-weight: 800;
+    font-weight: 800;
 
-        text-align: center;
+    text-align: center;
 
-        text-shadow:
-            0px 0px 8px rgba(16,185,129,0.7),
-            0px 0px 18px rgba(16,185,129,0.5);
+    line-height: 1.2;
 
-        margin-bottom: 10px;
-    }
+    text-shadow:
+        0px 0px 8px rgba(16,185,129,0.7),
+        0px 0px 18px rgba(16,185,129,0.5);
 
-    .sidebar-subtitle {
+    margin-bottom: 10px;
+}
 
-        color: #D1FAE5;
+.sidebar-subtitle {
 
-        text-align: center;
+    color: #D1FAE5;
 
-        font-size: 16px;
+    text-align: center;
 
-        margin-bottom: 30px;
-    }
+    font-size: 15px;
 
-    .section-title {
+    margin-bottom: 25px;
+}
 
-        color: white;
+label {
 
-        font-size: 28px;
+    color: white !important;
 
-        font-weight: 700;
+    font-weight: 600 !important;
+}
 
-        margin-top: 25px;
+div[data-baseweb="select"] {
 
-        margin-bottom: 15px;
-    }
+    background-color: #0F172A !important;
 
-    label {
+    border-radius: 12px !important;
+}
 
-        color: white !important;
+.stTextInput input {
 
-        font-weight: 600 !important;
-    }
+    background-color: #0F172A !important;
 
-    div[data-baseweb="select"] {
+    color: white !important;
 
-        background-color: #0F172A !important;
+    border-radius: 12px !important;
+}
 
-        border-radius: 14px !important;
-    }
+</style>
+""", unsafe_allow_html=True)
 
-    </style>
-    """, unsafe_allow_html=True)
+# SIDEBAR TITLE
 
-    # TITLE
+st.sidebar.markdown("""
+<div class="sidebar-title">
+    🌍 Global Alcohol <br>
+    Dashboard
+</div>
 
-    st.sidebar.markdown("""
-    <div class="sidebar-title">
-        🔢 Digit Dashboard
-    </div>
+<div class="sidebar-subtitle">
+    Professional Analytics
+</div>
+""", unsafe_allow_html=True)
 
-    <div class="sidebar-subtitle">
-        Professional Data Analytics
-    </div>
-    """, unsafe_allow_html=True)
+st.sidebar.markdown("---")
 
-    st.sidebar.markdown("---")
+# COUNTRY FILTER
 
-    # FILTERS TITLE
+country = st.sidebar.multiselect(
+    "Select Country",
+    df["country"].unique(),
+    default=df["country"].unique()
+)
 
-    st.sidebar.markdown("""
-    <div class="section-title">
-        🎛 Filters
-    </div>
-    """, unsafe_allow_html=True)
+# BEER RANGE
 
-    # DIGIT FILTER
-
-    selected_digits = st.sidebar.multiselect(
-        "Select Digits",
-        options=sorted(df["digit"].unique()),
-        default=sorted(df["digit"].unique())
+beer_range = st.sidebar.slider(
+    "Beer Servings",
+    int(df["beer_servings"].min()),
+    int(df["beer_servings"].max()),
+    (
+        int(df["beer_servings"].min()),
+        int(df["beer_servings"].max())
     )
+)
 
-    # CHART SELECTION
+# SEARCH
 
-    chart_options = st.sidebar.multiselect(
-        "Choose Charts",
-        [
-            "Histogram",
-            "Scatter Plot",
-            "Box Plot",
-            "Heatmap",
-            "Area Chart",
-            "Count Plot",
-            "Violin Plot"
-        ]
-    )
+search = st.sidebar.text_input(
+    "Search Country"
+)
 
-    st.session_state["chart_options"] = chart_options
+# EXTRA CHARTS
 
-    # FILTER DATA
+chart_options = st.sidebar.multiselect(
+    "Select Additional Charts",
+    [
+        "Histogram",
+        "Scatter Plot",
+        "Box Plot",
+        "Heatmap",
+        "Area Chart",
+        "Count Plot",
+        "Violin Plot"
+    ]
+)
 
-    filtered_df = df[
-        df["digit"].isin(selected_digits)
+st.session_state["chart_options"] = chart_options
+
+# FILTER DATA
+
+filtered_df = df[
+    (df["country"].isin(country))
+    &
+    (df["beer_servings"] >= beer_range[0])
+    &
+    (df["beer_servings"] <= beer_range[1])
+]
+
+if search:
+
+    filtered_df = filtered_df[
+        filtered_df["country"].str.contains(
+            search,
+            case=False
+        )
     ]
 
-    return filtered_df
+return filtered_df
+```
