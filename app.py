@@ -1,23 +1,27 @@
+```python
 import streamlit as st
 import pandas as pd
 
 from charts import *
 from filters import *
-import streamlit as st
 
 # PAGE CONFIG
 
 st.set_page_config(
-    page_title="Digit Dashboard",
+    page_title="Global Alcohol Dashboard",
     layout="wide"
 )
 
-# MAIN CSS
+# LOAD DATA
+
+df = pd.read_csv("drinks.csv")
+
+# CUSTOM CSS
 
 st.markdown("""
 <style>
 
-/* MAIN BACKGROUND */
+/* MAIN APP */
 
 .stApp {
 
@@ -31,7 +35,7 @@ st.markdown("""
     color: white;
 }
 
-/* MAIN CONTENT */
+/* MAIN CONTAINER */
 
 .main .block-container {
 
@@ -40,20 +44,13 @@ st.markdown("""
     padding-right: 3rem;
 }
 
-/* HEADINGS */
-
-h1, h2, h3 {
-
-    color: white !important;
-}
-
 /* KPI CARDS */
 
 .kpi-card {
 
     background: rgba(15,23,42,0.75);
 
-    padding: 22px;
+    padding: 24px;
 
     border-radius: 18px;
 
@@ -62,6 +59,24 @@ h1, h2, h3 {
     box-shadow: 0px 4px 20px rgba(0,0,0,0.35);
 
     text-align: center;
+}
+
+/* KPI TITLE */
+
+.kpi-card h4 {
+
+    color: #CBD5E1;
+
+    margin-bottom: 10px;
+}
+
+/* KPI VALUE */
+
+.kpi-card h1 {
+
+    color: white;
+
+    font-size: 42px;
 }
 
 /* CHART BOX */
@@ -79,106 +94,24 @@ h1, h2, h3 {
     margin-bottom: 25px;
 }
 
-</style>
-""", unsafe_allow_html=True)
+/* HEADINGS */
 
-# PAGE CONFIG
-
-st.set_page_config(
-    page_title="Alcohol Dashboard",
-    layout="wide"
-)
-
-# CUSTOM THEME
-
-st.markdown("""
-<style>
-
-/* MAIN BACKGROUND */
-
-.stApp {
-    background-color: #0E1117;
-}
-
-/* SIDEBAR */
-
-section[data-testid="stSidebar"] {
-    background-color: #161B22;
-}
-
-/* KPI CARDS */
-
-div[data-testid="metric-container"] {
-
-    background: linear-gradient(135deg, #00C853, #009624);
-
-    padding: 22px;
-
-    border-radius: 24px;
-
-    border: 4px solid #00E676;
-
-    box-shadow: 0px 0px 20px rgba(0,255,100,0.5);
-
-}
-
-/* KPI LABEL */
-
-div[data-testid="metric-container"] label {
+h1, h2, h3 {
 
     color: white !important;
-
-    font-size: 24px !important;
-
-    font-weight: bold !important;
-
-}
-
-/* KPI VALUE */
-
-div[data-testid="metric-container"] [data-testid="stMetricValue"] {
-
-    color: white !important;
-
-    font-size: 42px !important;
-
-    font-weight: bold !important;
-
-}
-
-/* SUBHEADINGS */
-
-h2, h3 {
-
-    color: white !important;
-
-}
-
-/* DATAFRAME */
-
-[data-testid="stDataFrame"] {
-
-    border-radius: 15px;
-
-    overflow: hidden;
-
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# LOAD DATA
-
-df = pd.read_csv("drinks.csv")
 # TITLE
 
 st.markdown("""
-<h1 style='
-font-size:60px;
-color:#39FF14;
-font-weight:bold;
-text-shadow: 0px 0px 2px #39FF14;
-'>
+<h1 style="
+font-size:58px;
+font-weight:800;
+color:white;
+">
 🌍 Global Alcohol Consumption Dashboard
 </h1>
 """, unsafe_allow_html=True)
@@ -186,11 +119,12 @@ text-shadow: 0px 0px 2px #39FF14;
 # SUBTITLE
 
 st.markdown("""
-<p style='
-font-size:25px;
-color:#A0AEC0;
-'>
-Professional Data Visualization Dashboard
+<p style="
+font-size:22px;
+color:#D1D5DB;
+margin-bottom:30px;
+">
+Professional Data Analytics Dashboard
 </p>
 """, unsafe_allow_html=True)
 
@@ -198,7 +132,7 @@ Professional Data Visualization Dashboard
 
 df = sidebar_filters(df)
 
-# KPI CARDS
+# KPI SECTION
 
 col1, col2, col3, col4 = st.columns(4)
 
@@ -215,8 +149,8 @@ with col2:
 
     st.markdown(f"""
     <div class="kpi-card">
-        <h4>Unique Digits</h4>
-        <h1>{df['digit'].nunique()}</h1>
+        <h4>Total Countries</h4>
+        <h1>{df['country'].nunique()}</h1>
     </div>
     """, unsafe_allow_html=True)
 
@@ -224,8 +158,8 @@ with col3:
 
     st.markdown(f"""
     <div class="kpi-card">
-        <h4>Avg Pixel 0</h4>
-        <h1>{round(df['pixel_0'].mean(),2)}</h1>
+        <h4>Avg Beer</h4>
+        <h1>{round(df['beer_servings'].mean(),2)}</h1>
     </div>
     """, unsafe_allow_html=True)
 
@@ -233,146 +167,122 @@ with col4:
 
     st.markdown(f"""
     <div class="kpi-card">
-        <h4>Avg Pixel 1</h4>
-        <h1>{round(df['pixel_1'].mean(),2)}</h1>
+        <h4>Avg Wine</h4>
+        <h1>{round(df['wine_servings'].mean(),2)}</h1>
     </div>
     """, unsafe_allow_html=True)
 
-col1.metric(
-    "Total Records",
-    len(df)
-)
+st.markdown("<br>", unsafe_allow_html=True)
 
-col2.metric(
-    "Avg Beer",
-    round(df["beer_servings"].mean(),2)
-)
+# DATASET
 
-col3.metric(
-    "Avg Spirit",
-    round(df["spirit_servings"].mean(),2)
-)
-
-col4.metric(
-    "Avg Wine",
-    round(df["wine_servings"].mean(),2)
-)
-
-st.markdown("---")
-
-# DATASET TABLE
-
-st.subheader("Dataset")
+st.subheader("Dataset Preview")
 
 st.dataframe(
     df,
     use_container_width=True
 )
 
-st.markdown("---")
+st.markdown("<br>", unsafe_allow_html=True)
 
-# BAR + PIE CHART
+# CHARTS
 
 col5, col6 = st.columns(2)
 
 with col5:
 
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
     st.subheader("Bar Chart")
 
     bar_chart(df)
 
+    st.markdown('</div>', unsafe_allow_html=True)
+
 with col6:
+
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
     st.subheader("Pie Chart")
 
     pie_chart(df)
 
-st.markdown("---")
+    st.markdown('</div>', unsafe_allow_html=True)
 
-# SCATTER + LINE CHART
+# EXTRA CHARTS
 
-col7, col8 = st.columns(2)
+chart_options = st.session_state.get(
+    "chart_options",
+    []
+)
 
-with col7:
+if "Histogram" in chart_options:
+
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
+
+    st.subheader("Histogram")
+
+    histogram(df)
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+if "Scatter Plot" in chart_options:
+
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
     st.subheader("Scatter Plot")
 
     scatter_plot(df)
 
-with col8:
+    st.markdown('</div>', unsafe_allow_html=True)
 
-    st.subheader("Line Chart")
+if "Box Plot" in chart_options:
 
-    line_chart(df)
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
-st.markdown("---")
+    st.subheader("Box Plot")
 
-# MULTI CHART SELECTOR
+    box_plot(df)
 
-chart_options = st.sidebar.multiselect(
-    "Select Additional Charts",
-    [
-        "All Charts",
-        "Histogram",
-        "Box Plot",
-        "Heatmap",
-        "Area Chart",
-        "Count Plot",
-        "Violin Plot"
-    ]
-)
+    st.markdown('</div>', unsafe_allow_html=True)
 
-# SHOW ALL CHARTS
+if "Heatmap" in chart_options:
 
-if "All Charts" in chart_options:
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
-    chart_options = [
-        "Histogram",
-        "Box Plot",
-        "Heatmap",
-        "Area Chart",
-        "Count Plot",
-        "Violin Plot"
-    ]
+    st.subheader("Heatmap")
 
-# DISPLAY CHARTS
+    heatmap(df)
 
-for chart in chart_options:
+    st.markdown('</div>', unsafe_allow_html=True)
 
-    st.markdown("---")
+if "Area Chart" in chart_options:
 
-    if chart == "Histogram":
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
-        st.subheader("Histogram")
+    st.subheader("Area Chart")
 
-        histogram(df)
+    area_chart(df)
 
-    elif chart == "Box Plot":
+    st.markdown('</div>', unsafe_allow_html=True)
 
-        st.subheader("Box Plot")
+if "Count Plot" in chart_options:
 
-        box_plot(df)
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
-    elif chart == "Heatmap":
+    st.subheader("Count Plot")
 
-        st.subheader("Heatmap")
+    count_plot(df)
 
-        heatmap(df)
+    st.markdown('</div>', unsafe_allow_html=True)
 
-    elif chart == "Area Chart":
+if "Violin Plot" in chart_options:
 
-        st.subheader("Area Chart")
+    st.markdown('<div class="chart-box">', unsafe_allow_html=True)
 
-        area_chart(df)
+    st.subheader("Violin Plot")
 
-    elif chart == "Count Plot":
+    violin_plot(df)
 
-        st.subheader("Count Plot")
-
-        count_plot(df)
-
-    elif chart == "Violin Plot":
-
-        st.subheader("Violin Plot")
-
-        violin_plot(df)
+    st.markdown('</div>', unsafe_allow_html=True)
+```
