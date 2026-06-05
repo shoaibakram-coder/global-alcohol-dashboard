@@ -2,62 +2,14 @@ import streamlit as st
 
 def sidebar_filters(df):
 
-    st.sidebar.markdown("""
-    <style>
-
-    section[data-testid="stSidebar"]{
-        background:linear-gradient(
-            180deg,
-            #052e16 0%,
-            #064e3b 100%
-        );
-    }
-
-    .sidebar-title{
-        color:#22c55e;
-
-        font-size:40px;
-
-        font-weight:800;
-
-        text-align:center;
-
-        text-shadow:
-            0px 0px 10px #22c55e,
-            0px 0px 20px #22c55e;
-    }
-
-    .sidebar-subtitle{
-        color:#dcfce7;
-
-        text-align:center;
-
-        font-size:16px;
-
-        margin-bottom:20px;
-    }
-
-    </style>
-    """, unsafe_allow_html=True)
-
-    st.sidebar.markdown("""
-    <div class="sidebar-title">
-        🌍 Global Alcohol Dashboard
-    </div>
-
-    <div class="sidebar-subtitle">
-        Professional Data Analytics
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.sidebar.markdown("---")
-
-    st.sidebar.header("Dashboard Filters")
+    st.sidebar.title(
+        "🌍 Dashboard Filters"
+    )
 
     selected_country = st.sidebar.multiselect(
         "Select Country",
-        options=sorted(df["country"].unique()),
-        default=sorted(df["country"].unique())
+        options=df["country"].unique(),
+        default=df["country"].unique()
     )
 
     chart_options = st.sidebar.multiselect(
@@ -67,7 +19,9 @@ def sidebar_filters(df):
             "Scatter Plot",
             "Box Plot",
             "Heatmap",
-            "Area Chart"
+            "Area Chart",
+            "Count Plot",
+            "Violin Plot"
         ]
     )
 

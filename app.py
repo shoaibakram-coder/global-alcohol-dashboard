@@ -19,38 +19,19 @@ st.markdown("""
     color:white;
 }
 
-.main-title{
-    color:#22c55e;
-    font-size:60px;
-    font-weight:800;
-    text-shadow:
-        0px 0px 10px #22c55e,
-        0px 0px 20px #22c55e;
-}
-
 .kpi-box{
-    background:linear-gradient(
-        135deg,
-        #1E293B,
-        #334155
-    );
-
+    background:linear-gradient(135deg,#1E293B,#334155);
     padding:25px;
-
     border-radius:18px;
-
     text-align:center;
-
-    border:1px solid #475569;
-
     box-shadow:0px 0px 12px rgba(0,0,0,0.3);
+    border:1px solid #475569;
 }
 
 .kpi-title{
     color:#CBD5E1;
     font-size:18px;
     margin-bottom:10px;
-    font-weight:bold;
 }
 
 .kpi-value{
@@ -62,85 +43,45 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<h1 class="main-title">
-🌍 Global Alcohol Consumption Dashboard
-</h1>
-""", unsafe_allow_html=True)
+st.title("🌍 Global Alcohol Consumption Dashboard")
 
 st.write("Professional Data Analytics Dashboard")
 
 df = sidebar_filters(df)
 
-col1, col2, col3, col4 = st.columns(4)
+col1,col2,col3,col4 = st.columns(4)
 
 with col1:
-
-    st.markdown(
-        f"""
-        <div class="kpi-box">
-            <div class="kpi-title">
-                Total Records
-            </div>
-
-            <div class="kpi-value">
-                {len(df)}
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown(f"""
+    <div class="kpi-box">
+        <div class="kpi-title">Total Records</div>
+        <div class="kpi-value">{len(df)}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
 with col2:
-
-    st.markdown(
-        f"""
-        <div class="kpi-box">
-            <div class="kpi-title">
-                Total Countries
-            </div>
-
-            <div class="kpi-value">
-                {df['country'].nunique()}
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown(f"""
+    <div class="kpi-box">
+        <div class="kpi-title">Total Countries</div>
+        <div class="kpi-value">{df['country'].nunique()}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
 with col3:
-
-    st.markdown(
-        f"""
-        <div class="kpi-box">
-            <div class="kpi-title">
-                Avg Beer
-            </div>
-
-            <div class="kpi-value">
-                {round(df['beer_servings'].mean(),2)}
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown(f"""
+    <div class="kpi-box">
+        <div class="kpi-title">Avg Beer</div>
+        <div class="kpi-value">{round(df['beer_servings'].mean(),2)}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
 with col4:
-
-    st.markdown(
-        f"""
-        <div class="kpi-box">
-            <div class="kpi-title">
-                Avg Wine
-            </div>
-
-            <div class="kpi-value">
-                {round(df['wine_servings'].mean(),2)}
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown(f"""
+    <div class="kpi-box">
+        <div class="kpi-title">Avg Wine</div>
+        <div class="kpi-value">{round(df['wine_servings'].mean(),2)}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -153,7 +94,7 @@ st.dataframe(
 
 st.markdown("---")
 
-col5, col6 = st.columns(2)
+col5,col6 = st.columns(2)
 
 with col5:
 
