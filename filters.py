@@ -14,74 +14,50 @@ def sidebar_filters(df):
     }
 
     .sidebar-main-title{
-
         color:white;
-
         font-size:34px;
-
         font-weight:800;
-
         text-align:center;
-
         line-height:1.2;
-
         margin-bottom:10px;
     }
 
     .sidebar-subtitle{
-
         color:#E2E8F0;
-
         text-align:center;
-
         font-size:15px;
-
         margin-bottom:20px;
     }
 
     label{
-
         color:#38BDF8 !important;
-
         font-weight:bold !important;
     }
 
     [data-baseweb="tag"]{
-
         background-color:#2563EB !important;
-
         color:white !important;
-
         border:none !important;
-
         border-radius:10px !important;
-
         padding:4px 8px !important;
     }
 
     [data-baseweb="tag"] span{
-
         color:white !important;
-
         font-weight:bold !important;
     }
 
     [data-baseweb="tag"] svg{
-
         color:white !important;
     }
 
     div[data-baseweb="select"] > div{
-
         background-color:#0F172A !important;
-
         border:1px solid #38BDF8 !important;
-
         border-radius:12px !important;
     }
 
     svg{
-
         color:white !important;
     }
 
@@ -100,41 +76,11 @@ def sidebar_filters(df):
 
     st.sidebar.markdown("---")
 
-    st.sidebar.markdown(
-        """
-        <h2 style="
-            color:white;
-            font-size:26px;
-            font-weight:bold;
-            margin-bottom:15px;
-        ">
-        🎛️ Dashboard Controls
-        </h2>
-        """,
-        unsafe_allow_html=True
-    )
-
-    beer_range = st.sidebar.slider(
-        "Beer Servings Range",
-        min_value=int(df["beer_servings"].min()),
-        max_value=int(df["beer_servings"].max()),
-        value=(
-            int(df["beer_servings"].min()),
-            int(df["beer_servings"].max())
-        )
-    )
-
-    df = df[
-        (df["beer_servings"] >= beer_range[0]) &
-        (df["beer_servings"] <= beer_range[1])
-    ]
+    st.sidebar.header("🎛️ Dashboard Controls")
 
     st.sidebar.markdown("---")
-    
-    
 
-
-st.sidebar.header("Dashboard Filters")
+    st.sidebar.header("Dashboard Filters")
 
     selected_country = st.sidebar.multiselect(
         "Select Country",
