@@ -131,9 +131,7 @@ def sidebar_filters(df):
 
     st.sidebar.markdown("---")
     
-    st.sidebar.header("🎛️ Dashboard Controls")
-
-    st.sidebar.markdown("---")
+    
 
 
 st.sidebar.header("Dashboard Filters")
