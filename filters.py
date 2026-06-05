@@ -13,58 +13,80 @@ def sidebar_filters(df):
         );
     }
 
-  
-.sidebar-main-title{
+    .sidebar-main-title{
 
-    color:white;
+        color:white;
 
-    font-size:34px;
+        font-size:34px;
 
-    font-weight:800;
+        font-weight:800;
 
-    text-align:center;
+        text-align:center;
 
-    line-height:1.2;
+        line-height:1.2;
 
-    margin-bottom:10px;
-}
-
-
+        margin-bottom:10px;
+    }
 
     .sidebar-subtitle{
+
         color:#E2E8F0;
+
         text-align:center;
+
         font-size:15px;
+
         margin-bottom:20px;
     }
 
     label{
+
         color:#38BDF8 !important;
+
         font-weight:bold !important;
     }
 
     span{
+
         color:white !important;
     }
 
     div[data-baseweb="select"] > div{
+
         background-color:#0F172A !important;
+
         border:1px solid #38BDF8 !important;
+
         border-radius:12px !important;
     }
 
     div[data-baseweb="tag"]{
-        background:#2563EB !important;
-        border-radius:8px !important;
+
+        background-color:#2563EB !important;
+
+        color:white !important;
+
         border:none !important;
+
+        border-radius:10px !important;
+
+        padding:4px 8px !important;
     }
 
     div[data-baseweb="tag"] span{
+
         color:white !important;
+
         font-weight:bold !important;
     }
 
+    div[data-baseweb="tag"] svg{
+
+        color:white !important;
+    }
+
     svg{
+
         color:white !important;
     }
 
