@@ -46,10 +46,19 @@ def sidebar_filters(df):
         font-weight:bold !important;
     }
 
-    span{
+[data-baseweb="tag"]{
 
-        color:white !important;
-    }
+    background-color:#2563EB !important;
+
+    color:white !important;
+}
+
+[data-baseweb="tag"] span{
+
+    color:white !important;
+}
+
+
 
     div[data-baseweb="select"] > div{
 
