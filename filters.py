@@ -8,14 +8,14 @@ def sidebar_filters(df):
     section[data-testid="stSidebar"]{
         background:linear-gradient(
             180deg,
-            #052e16 0%,
-            #064e3b 100%
+            #0B1120 0%,
+            #111827 100%
         );
     }
 
     .sidebar-main-title{
 
-        color:#22c55e;
+        color:white;
 
         font-size:34px;
 
@@ -26,15 +26,15 @@ def sidebar_filters(df):
         line-height:1.2;
 
         text-shadow:
-            0px 0px 10px #22c55e,
-            0px 0px 20px #22c55e;
+            0px 0px 8px rgba(34,197,94,0.8),
+            0px 0px 18px rgba(34,197,94,0.6);
 
         margin-bottom:10px;
     }
 
     .sidebar-subtitle{
 
-        color:#dcfce7;
+        color:#E2E8F0;
 
         text-align:center;
 
