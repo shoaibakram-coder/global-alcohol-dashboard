@@ -14,41 +14,26 @@ def sidebar_filters(df):
     }
 
     .sidebar-main-title{
-
         color:#38BDF8;
-
         font-size:34px;
-
         font-weight:800;
-
         text-align:center;
-
         line-height:1.2;
-
         text-shadow:
             0px 0px 8px rgba(56,189,248,0.8),
             0px 0px 18px rgba(56,189,248,0.6);
-
         margin-bottom:10px;
     }
 
     .sidebar-subtitle{
-
         color:#E2E8F0;
-
         text-align:center;
-
         font-size:15px;
-
         margin-bottom:20px;
     }
 
     h1{
         color:#38BDF8 !important;
-
-        text-shadow:
-            0px 0px 8px rgba(56,189,248,0.7),
-            0px 0px 18px rgba(56,189,248,0.5);
     }
 
     label{
@@ -57,13 +42,32 @@ def sidebar_filters(df):
     }
 
     span{
-        color:#38BDF8 !important;
+        color:white !important;
     }
 
-    div[data-baseweb="select"]{
+    /* SELECT BOX */
+
+    div[data-baseweb="select"] > div{
         background-color:#0F172A !important;
-        border-radius:12px !important;
         border:1px solid #38BDF8 !important;
+        border-radius:12px !important;
+    }
+
+    /* SELECTED TAGS */
+
+    div[data-baseweb="tag"]{
+        background:#2563EB !important;
+        border-radius:8px !important;
+        border:none !important;
+    }
+
+    div[data-baseweb="tag"] span{
+        color:white !important;
+        font-weight:bold !important;
+    }
+
+    svg{
+        color:white !important;
     }
 
     </style>
