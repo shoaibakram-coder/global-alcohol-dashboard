@@ -15,7 +15,7 @@ def sidebar_filters(df):
 
     .sidebar-main-title{
 
-        color:white;
+        color:#38BDF8;
 
         font-size:34px;
 
@@ -26,8 +26,8 @@ def sidebar_filters(df):
         line-height:1.2;
 
         text-shadow:
-            0px 0px 8px rgba(34,197,94,0.8),
-            0px 0px 18px rgba(34,197,94,0.6);
+            0px 0px 8px rgba(56,189,248,0.8),
+            0px 0px 18px rgba(56,189,248,0.6);
 
         margin-bottom:10px;
     }
@@ -43,15 +43,27 @@ def sidebar_filters(df):
         margin-bottom:20px;
     }
 
+    h1{
+        color:#38BDF8 !important;
+
+        text-shadow:
+            0px 0px 8px rgba(56,189,248,0.7),
+            0px 0px 18px rgba(56,189,248,0.5);
+    }
+
     label{
-        color:white !important;
+        color:#38BDF8 !important;
         font-weight:bold !important;
+    }
+
+    span{
+        color:#38BDF8 !important;
     }
 
     div[data-baseweb="select"]{
         background-color:#0F172A !important;
         border-radius:12px !important;
-        border:1px solid #22c55e !important;
+        border:1px solid #38BDF8 !important;
     }
 
     </style>
