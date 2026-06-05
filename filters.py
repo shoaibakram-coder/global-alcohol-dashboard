@@ -1,159 +1,110 @@
 import streamlit as st
-import pandas as pd
 
-from charts import *
-from filters import *
+def sidebar_filters(df):
 
-st.set_page_config(
-    page_title="Global Alcohol Dashboard",
-    layout="wide"
-)
+    st.sidebar.markdown("""
+    <style>
 
-df = pd.read_csv("drinks.csv")
+    section[data-testid="stSidebar"]{
+        background:linear-gradient(
+            180deg,
+            #0B1120 0%,
+            #111827 100%
+        );
+    }
 
-st.markdown("""
-<style>
+    .sidebar-main-title{
+        color:#38BDF8;
+        font-size:34px;
+        font-weight:800;
+        text-align:center;
+        line-height:1.2;
 
-.stApp{
-    background-color:#0F172A;
-    color:white;
-}
+        text-shadow:
+            0px 0px 8px rgba(56,189,248,0.8),
+            0px 0px 18px rgba(56,189,248,0.6);
 
-.kpi-box{
-    background:linear-gradient(135deg,#1E293B,#334155);
-    padding:25px;
-    border-radius:18px;
-    text-align:center;
-    box-shadow:0px 0px 12px rgba(0,0,0,0.3);
-    border:1px solid #475569;
-}
+        margin-bottom:10px;
+    }
 
-.kpi-title{
-    color:#CBD5E1;
-    font-size:18px;
-    margin-bottom:10px;
-}
+    .sidebar-subtitle{
+        color:#E2E8F0;
+        text-align:center;
+        font-size:15px;
+        margin-bottom:20px;
+    }
 
-.kpi-value{
-    color:white;
-    font-size:38px;
-    font-weight:bold;
-}
+    label{
+        color:#38BDF8 !important;
+        font-weight:bold !important;
+    }
 
-</style>
-""", unsafe_allow_html=True)
+    span{
+        color:white !important;
+    }
 
-st.title("🌍 Global Alcohol Consumption Dashboard")
+    div[data-baseweb="select"] > div{
+        background-color:#0F172A !important;
+        border:1px solid #38BDF8 !important;
+        border-radius:12px !important;
+    }
 
-st.write("Professional Data Analytics Dashboard")
+    div[data-baseweb="tag"]{
+        background:#2563EB !important;
+        border-radius:8px !important;
+        border:none !important;
+    }
 
-df = sidebar_filters(df)
+    div[data-baseweb="tag"] span{
+        color:white !important;
+        font-weight:bold !important;
+    }
 
-col1,col2,col3,col4 = st.columns(4)
+    svg{
+        color:white !important;
+    }
 
-with col1:
-    st.markdown(f"""
-    <div class="kpi-box">
-        <div class="kpi-title">Total Records</div>
-        <div class="kpi-value">{len(df)}</div>
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.sidebar.markdown("""
+    <div class="sidebar-main-title">
+        🌍 Global Alcohol Consumption Dashboard
+    </div>
+
+    <div class="sidebar-subtitle">
+        Professional Data Analytics Dashboard
     </div>
     """, unsafe_allow_html=True)
 
-with col2:
-    st.markdown(f"""
-    <div class="kpi-box">
-        <div class="kpi-title">Total Countries</div>
-        <div class="kpi-value">{df['country'].nunique()}</div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.sidebar.markdown("---")
 
-with col3:
-    st.markdown(f"""
-    <div class="kpi-box">
-        <div class="kpi-title">Avg Beer</div>
-        <div class="kpi-value">{round(df['beer_servings'].mean(),2)}</div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.sidebar.header("Dashboard Filters")
 
-with col4:
-    st.markdown(f"""
-    <div class="kpi-box">
-        <div class="kpi-title">Avg Wine</div>
-        <div class="kpi-value">{round(df['wine_servings'].mean(),2)}</div>
-    </div>
-    """, unsafe_allow_html=True)
+    selected_country = st.sidebar.multiselect(
+        "Select Country",
+        options=sorted(df["country"].unique()),
+        default=sorted(df["country"].unique())
+    )
 
-st.markdown("---")
+    chart_options = st.sidebar.multiselect(
+        "Select Additional Charts",
+        [
+            "Histogram",
+            "Scatter Plot",
+            "Box Plot",
+            "Heatmap",
+            "Area Chart",
+            "Count Plot",
+            "Violin Plot"
+        ]
+    )
 
-st.subheader("Dataset Preview")
+    st.session_state["chart_options"] = chart_options
 
-st.dataframe(
-    df,
-    use_container_width=True
-)
+    filtered_df = df[
+        df["country"].isin(selected_country)
+    ]
 
-st.markdown("---")
-
-col5,col6 = st.columns(2)
-
-with col5:
-
-    st.subheader("Bar Chart")
-
-    bar_chart(df)
-
-with col6:
-
-    st.subheader("Pie Chart")
-
-    pie_chart(df)
-
-st.markdown("---")
-
-chart_options = st.session_state.get(
-    "chart_options",
-    []
-)
-
-if "Histogram" in chart_options:
-
-    st.subheader("Histogram")
-
-    histogram(df)
-
-if "Scatter Plot" in chart_options:
-
-    st.subheader("Scatter Plot")
-
-    scatter_plot(df)
-
-if "Box Plot" in chart_options:
-
-    st.subheader("Box Plot")
-
-    box_plot(df)
-
-if "Heatmap" in chart_options:
-
-    st.subheader("Heatmap")
-
-    heatmap(df)
-
-if "Area Chart" in chart_options:
-
-    st.subheader("Area Chart")
-
-    area_chart(df)
-
-if "Count Plot" in chart_options:
-
-    st.subheader("Count Plot")
-
-    count_plot(df)
-
-if "Violin Plot" in chart_options:
-
-    st.subheader("Violin Plot")
-
-    violin_plot(df)
+    return filtered_df
 
