@@ -15,10 +15,10 @@ def sidebar_filters(df):
 
     .sidebar-main-title{
         color:white;
-        font-size:28px;
+        font-size:26px;
         font-weight:800;
         text-align:center;
-        line-height:1.2;
+        line-height:1.3;
         margin-bottom:10px;
     }
 
@@ -76,24 +76,22 @@ def sidebar_filters(df):
 
     st.sidebar.markdown("---")
 
-beer_range = st.sidebar.slider(
-    "Beer Servings Range",
-    min_value=int(df["beer_servings"].min()),
-    max_value=int(df["beer_servings"].max()),
-    value=(
-        int(df["beer_servings"].min()),
-        int(df["beer_servings"].max())
-    )
-)
-
-df = df[
-    (df["beer_servings"] >= beer_range[0]) &
-    (df["beer_servings"] <= beer_range[1])
-]
-
-
-
     st.sidebar.header("🎛️ Dashboard Controls")
+
+    beer_range = st.sidebar.slider(
+        "Beer Servings Range",
+        min_value=int(df["beer_servings"].min()),
+        max_value=int(df["beer_servings"].max()),
+        value=(
+            int(df["beer_servings"].min()),
+            int(df["beer_servings"].max())
+        )
+    )
+
+    df = df[
+        (df["beer_servings"] >= beer_range[0]) &
+        (df["beer_servings"] <= beer_range[1])
+    ]
 
     st.sidebar.markdown("---")
 
@@ -125,4 +123,3 @@ df = df[
     ]
 
     return filtered_df
-
