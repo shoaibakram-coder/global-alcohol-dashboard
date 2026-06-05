@@ -60,6 +60,12 @@ def sidebar_filters(df):
     svg{
         color:white !important;
     }
+                        
+.stSlider > div > div > div > div {
+    background-color:#2563EB !important;
+}
+
+
 
     </style>
     """, unsafe_allow_html=True)
