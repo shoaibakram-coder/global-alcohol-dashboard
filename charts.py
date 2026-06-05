@@ -6,15 +6,16 @@ def bar_chart(df):
 
     fig, ax = plt.subplots(figsize=(8,5))
 
-    top10 = df.sort_values(
+    top_beer = df.sort_values(
         by="beer_servings",
         ascending=False
     ).head(10)
 
     sns.barplot(
-        data=top10,
         x="beer_servings",
         y="country",
+        data=top_beer,
+        palette="Blues_r",
         ax=ax
     )
 
@@ -24,23 +25,22 @@ def pie_chart(df):
 
     fig, ax = plt.subplots(figsize=(8,8))
 
-    top5 = df.head(5)
-
-    ax.pie(
-        top5["beer_servings"],
-        labels=top5["country"],
-        autopct="%1.1f%%"
+    df.groupby("country")["beer_servings"].sum().head(10).plot(
+        kind="pie",
+        autopct="%1.1f%%",
+        ax=ax
     )
 
     st.pyplot(fig)
 
 def histogram(df):
 
-    fig, ax = plt.subplots(figsize=(8,5))
+    fig, ax = plt.subplots(figsize=(10,5))
 
     ax.hist(
         df["beer_servings"],
-        bins=20
+        bins=20,
+        color="#2563EB"
     )
 
     st.pyplot(fig)
@@ -53,6 +53,7 @@ def scatter_plot(df):
         data=df,
         x="beer_servings",
         y="wine_servings",
+        color="#38BDF8",
         ax=ax
     )
 
@@ -60,11 +61,11 @@ def scatter_plot(df):
 
 def box_plot(df):
 
-    fig, ax = plt.subplots(figsize=(8,5))
+    fig, ax = plt.subplots(figsize=(10,5))
 
     sns.boxplot(
-        data=df,
-        y="beer_servings",
+        y=df["beer_servings"],
+        color="#38BDF8",
         ax=ax
     )
 
@@ -72,12 +73,12 @@ def box_plot(df):
 
 def heatmap(df):
 
-    fig, ax = plt.subplots(figsize=(10,6))
+    fig, ax = plt.subplots(figsize=(12,8))
 
     sns.heatmap(
         df.select_dtypes(include="number").corr(),
-        annot=True,
         cmap="Blues",
+        annot=True,
         ax=ax
     )
 
@@ -94,38 +95,28 @@ def area_chart(df):
         ].head(20)
     )
 
-```python id="r3h2mw"
 def count_plot(df):
-
-    import streamlit as st
-    import matplotlib.pyplot as plt
-    import seaborn as sns
 
     fig, ax = plt.subplots(figsize=(10,5))
 
-    top_countries = df.head(10)
-
     sns.countplot(
         y="country",
-        data=top_countries,
+        data=df.head(10),
         palette="Blues_r",
         ax=ax
     )
 
-    ax.set_title("Top Countries")
-
     st.pyplot(fig)
-
-
 
 def violin_plot(df):
 
-    fig, ax = plt.subplots(figsize=(8,5))
+    fig, ax = plt.subplots(figsize=(10,5))
 
     sns.violinplot(
-        data=df,
-        y="beer_servings",
+        y=df["beer_servings"],
+        color="#2563EB",
         ax=ax
     )
 
     st.pyplot(fig)
+
