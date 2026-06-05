@@ -19,75 +19,31 @@ st.markdown("""
     color:white;
 }
 
-/* MAIN TITLE */
-
-.main-title{
-
-    color:#38BDF8;
-
-    font-size:58px;
-
-    font-weight:800;
-
-    text-shadow:
-        0px 0px 8px rgba(56,189,248,0.8),
-        0px 0px 18px rgba(56,189,248,0.6),
-        0px 0px 28px rgba(56,189,248,0.4);
-}
-
-/* KPI BOX */
-
 .kpi-box{
-
-    background:linear-gradient(
-        135deg,
-        #1E293B,
-        #334155
-    );
-
+    background:linear-gradient(135deg,#1E293B,#334155);
     padding:25px;
-
     border-radius:18px;
-
     text-align:center;
-
     box-shadow:0px 0px 12px rgba(0,0,0,0.3);
-
     border:1px solid #475569;
 }
 
-/* KPI TITLE */
-
 .kpi-title{
-
     color:#CBD5E1;
-
     font-size:18px;
-
     margin-bottom:10px;
-
-    font-weight:bold;
 }
 
-/* KPI VALUE */
-
 .kpi-value{
-
     color:white;
-
     font-size:38px;
-
     font-weight:bold;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<h1 class="main-title">
-🌍 Global Alcohol Consumption Dashboard
-</h1>
-""", unsafe_allow_html=True)
+st.title("🌍 Global Alcohol Consumption Dashboard")
 
 st.write("Professional Data Analytics Dashboard")
 
@@ -96,58 +52,34 @@ df = sidebar_filters(df)
 col1,col2,col3,col4 = st.columns(4)
 
 with col1:
-
     st.markdown(f"""
     <div class="kpi-box">
-        <div class="kpi-title">
-            Total Records
-        </div>
-
-        <div class="kpi-value">
-            {len(df)}
-        </div>
+        <div class="kpi-title">Total Records</div>
+        <div class="kpi-value">{len(df)}</div>
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
-
     st.markdown(f"""
     <div class="kpi-box">
-        <div class="kpi-title">
-            Total Countries
-        </div>
-
-        <div class="kpi-value">
-            {df['country'].nunique()}
-        </div>
+        <div class="kpi-title">Total Countries</div>
+        <div class="kpi-value">{df['country'].nunique()}</div>
     </div>
     """, unsafe_allow_html=True)
 
 with col3:
-
     st.markdown(f"""
     <div class="kpi-box">
-        <div class="kpi-title">
-            Avg Beer
-        </div>
-
-        <div class="kpi-value">
-            {round(df['beer_servings'].mean(),2)}
-        </div>
+        <div class="kpi-title">Avg Beer</div>
+        <div class="kpi-value">{round(df['beer_servings'].mean(),2)}</div>
     </div>
     """, unsafe_allow_html=True)
 
 with col4:
-
     st.markdown(f"""
     <div class="kpi-box">
-        <div class="kpi-title">
-            Avg Wine
-        </div>
-
-        <div class="kpi-value">
-            {round(df['wine_servings'].mean(),2)}
-        </div>
+        <div class="kpi-title">Avg Wine</div>
+        <div class="kpi-value">{round(df['wine_servings'].mean(),2)}</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -224,4 +156,3 @@ if "Violin Plot" in chart_options:
     st.subheader("Violin Plot")
 
     violin_plot(df)
-
