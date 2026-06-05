@@ -13,19 +13,23 @@ def sidebar_filters(df):
         );
     }
 
-    .sidebar-main-title{
-        color:#38BDF8;
-        font-size:34px;
-        font-weight:800;
-        text-align:center;
-        line-height:1.2;
+  
+.sidebar-main-title{
 
-        text-shadow:
-            0px 0px 8px rgba(56,189,248,0.8),
-            0px 0px 18px rgba(56,189,248,0.6);
+    color:white;
 
-        margin-bottom:10px;
-    }
+    font-size:34px;
+
+    font-weight:800;
+
+    text-align:center;
+
+    line-height:1.2;
+
+    margin-bottom:10px;
+}
+
+
 
     .sidebar-subtitle{
         color:#E2E8F0;

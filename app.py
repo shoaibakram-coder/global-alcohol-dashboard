@@ -42,9 +42,10 @@ st.markdown("""
 
 </style>
 """, unsafe_allow_html=True)
-
-st.title("🌍 Global Alcohol Consumption Dashboard")
-
+st.markdown(
+    "<h1 style='color:white;'>🌍 Global Alcohol Consumption Dashboard</h1>",
+    unsafe_allow_html=True
+    )
 st.write("Professional Data Analytics Dashboard")
 
 df = sidebar_filters(df)
