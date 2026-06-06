@@ -44,14 +44,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<h1 style="
-    color:white;
-    text-align:left;
-
-    
-
-st.markdown("""
-<h1 style="
+<h1 style='
     color:white;
     text-align:left;
 
@@ -59,12 +52,10 @@ st.markdown("""
         0px 0px 10px #3B82F6,
         0px 0px 20px #3B82F6,
         0px 0px 30px #2563EB;
-">
+'>
 🌍 Global Alcohol Consumption Dashboard
 </h1>
 """, unsafe_allow_html=True)
-
-
 
 st.write("Professional Data Analytics Dashboard")
 
@@ -188,4 +179,3 @@ if "Violin Plot" in chart_options:
     st.subheader("Violin Plot")
 
     violin_plot(df)
-
