@@ -48,10 +48,7 @@ st.markdown("""
     color:white;
     text-align:left;
 
-    text-shadow:
-        0px 0px 10px #3B82F6,
-        0px 0px 20px #3B82F6,
-        0px 0px 30px #2563EB;
+   
 '>
 🌍 Global Alcohol Consumption Dashboard
 </h1>
