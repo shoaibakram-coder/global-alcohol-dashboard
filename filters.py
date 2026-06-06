@@ -20,10 +20,6 @@ def sidebar_filters(df):
         text-align:center;
         line-height:1.3;
         margin-bottom:10px;
-
-        text-shadow:
-            0px 0px 6px rgba(59,130,246,0.8),
-            0px 0px 12px rgba(59,130,246,0.6);
     }
 
     .sidebar-subtitle{
