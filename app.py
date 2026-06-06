@@ -42,10 +42,21 @@ st.markdown("""
 
 </style>
 """, unsafe_allow_html=True)
-st.markdown(
-    "<h1 style='color:white;'>🌍 Global Alcohol Consumption Dashboard</h1>",
-    unsafe_allow_html=True
-    )
+
+st.markdown("""
+<h1 style="
+    color:white;
+    text-align:left;
+
+    text-shadow:
+        0px 0px 6px rgba(59,130,246,0.8),
+        0px 0px 12px rgba(59,130,246,0.6);
+
+">
+🌍 Global Alcohol Consumption Dashboard
+</h1>
+""", unsafe_allow_html=True)
+
 st.write("Professional Data Analytics Dashboard")
 
 df = sidebar_filters(df)
@@ -60,8 +71,6 @@ elif page == "Charts & Visualizations":
 
 elif page == "Dataset Explorer":
     st.title("🗂️ Dataset Explorer")
-
-
 
 col1,col2,col3,col4 = st.columns(4)
 
@@ -170,3 +179,4 @@ if "Violin Plot" in chart_options:
     st.subheader("Violin Plot")
 
     violin_plot(df)
+
